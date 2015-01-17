@@ -1,0 +1,15 @@
+<div class='well'>
+  <%= form_for @topic do |f| %>
+    <div class='content-group'>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class='content-group'>
+      <%= f.label :content %>
+      <%= f.text_area :content, rows: 5 %>
+    </div>
+    
+    <%= f.submit(@topic.new_record? ? 'Create' : 'Save', class: 'btn btn-primary') %>
+  <% end %>
+</div>

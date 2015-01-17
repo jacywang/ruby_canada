@@ -1,3 +1,10 @@
-<h3>Welcome!</h3>
+<%= render 'shared/content_title', title: 'All Topics' %>
 
-<p>This is the Postit template. You've access the PostsController, index action. This is the index template. Find me under app/views/posts folder.</p>
+<% @topics.each do |topic| %>
+  <div class="row">
+    <div class="well span8">
+      <h4><%= link_to topic.title, topic %></h4>
+      <p><%= topic.content %></p> 
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+<p class='pull-right'>[<%= link_to 'edit this topic', edit_topic_path %>]</p>
+
+<%= render 'shared/content_title', title: @topic.title %>
+
+<div class="well">
+  <%= @topic.content %>
+</div>
