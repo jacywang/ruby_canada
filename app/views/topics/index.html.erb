@@ -1,10 +1,5 @@
 <%= render 'shared/content_title', title: 'All Topics' %>
 
 <% @topics.each do |topic| %>
-  <div class="row">
-    <div class="well span8">
-      <h4><%= link_to topic.title, topic %></h4>
-      <p><%= topic.content %></p> 
-    </div>
-  </div>
+  <%= render 'topic', topic: topic %>
 <% end %>

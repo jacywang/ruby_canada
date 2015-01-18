@@ -1,0 +1,7 @@
+<% header = link_to('All Topics', topics_path) + " &raquo; #{@category.name}".html_safe %>
+
+<%= render 'shared/content_title', title: header %>
+
+<% @category.topics.each do |topic| %>
+  <%= render 'topics/topic', topic: topic %>
+<% end %>
