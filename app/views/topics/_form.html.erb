@@ -9,7 +9,14 @@
       <%= f.label :content %>
       <%= f.text_area :content, rows: 5 %>
     </div>
-    
+
+    <div class='content-group'>
+      <%= f.label :categories %>
+      <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |c| %>
+        <%= c.label(class: "checkbox inline") { c.check_box(class: "checkbox") + c.text} %>
+      <% end %>
+    </div>
+
     <%= f.submit(@topic.new_record? ? 'Create' : 'Save', class: 'btn btn-primary') %>
   <% end %>
 </div>

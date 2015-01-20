@@ -13,6 +13,7 @@ class TopicsController < ApplicationController
   end
 
   def create
+    binding.pry
     @topic = Topic.new(topic_params)
     if @topic.save
       flash[:notice] = "Your new topic was created!"
@@ -36,7 +37,7 @@ class TopicsController < ApplicationController
 
   private
     def topic_params
-      params.require(:topic).permit(:title, :content)
+      params.require(:topic).permit(:title, :content, category_ids: [])
     end
 
     def set_topic
