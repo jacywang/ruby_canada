@@ -6,6 +6,7 @@ class TopicsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
   end
 
   def new
@@ -13,7 +14,6 @@ class TopicsController < ApplicationController
   end
 
   def create
-    binding.pry
     @topic = Topic.new(topic_params)
     if @topic.save
       flash[:notice] = "Your new topic was created!"
