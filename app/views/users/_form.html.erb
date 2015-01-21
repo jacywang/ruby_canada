@@ -1,0 +1,21 @@
+<div class="well">
+  <%= form_for @user do |f| %>
+    <%= render 'shared/error', obj: @user %>
+    <div class="content-group">
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </div>
+
+    <div class="content-group">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="content-group">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+
+    <%= f.submit(@user.new_record? ? 'Create' : 'Update', class: 'btn btn-primary') %>
+  <% end %>
+<div>
