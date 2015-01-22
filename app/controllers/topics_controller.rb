@@ -1,5 +1,7 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update]
+  before_action :require_user, only: [:new, :create, :edit, :update]
+  before_action :require_creator, only: [:edit, :update]
 
   def index
     @topics = Topic.all
@@ -42,5 +44,9 @@ class TopicsController < ApplicationController
 
     def set_topic
       @topic = Topic.find(params[:id])
+    end
+
+    def require_creator
+      access_denied if current_user != @topic.user  
     end
 end

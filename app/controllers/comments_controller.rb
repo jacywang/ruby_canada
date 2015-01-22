@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :require_user
+  
   def create
     @topic = Topic.find(params[:topic_id])
     @comment = @topic.comments.new(comment_params)

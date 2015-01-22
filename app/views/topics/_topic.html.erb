@@ -3,5 +3,11 @@
     <%= render topic.categories %>
     <h4><%= link_to topic.title, topic %></h4>
     <p><%= topic.content %></p> 
+    <p>
+      <span class="quiet">created by</span> 
+      <%= link_to topic.user.username, user_path(topic.user) %> 
+      <small>at <%= topic.created_at %></small>
+    </p>
+    <small><span><%= link_to pluralize(topic.comments.size, "comment"), topic_path(topic) %></span></small>
   </div>
 </div>
