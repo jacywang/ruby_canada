@@ -1,10 +1,10 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :update]
-  before_action :require_user, only: [:new, :create, :edit, :update]
+  before_action :set_topic, only: [:show, :edit, :update, :vote]
+  before_action :require_user, only: [:new, :create, :edit, :update, :vote]
   before_action :require_creator, only: [:edit, :update]
 
   def index
-    @topics = Topic.all
+    @topics = Topic.all.sort_by { |topic| topic.votes.size }.reverse
   end
 
   def show
@@ -35,6 +35,16 @@ class TopicsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def vote
+    vote = Vote.new(voteable: @topic, vote: params[:vote], user: current_user)
+    if vote.save
+      flash[:notice] = "You vote was counted!"
+    else
+      flash[:error] = "You can only vote once for <strong>#{@topic.title}</strong>".html_safe
+    end
+    redirect_to :back
   end
 
   private

@@ -1,4 +1,17 @@
 <div class="row">
+  <div class="span0 well text-center">
+    <% if logged_in? %>
+      <%= link_to vote_topic_path(topic, vote: true), method: 'post' do %>
+        <i class="icon-arrow-up"></i>
+      <% end %> <br>
+    <% end %>
+    <span><%= pluralize(topic.votes.size,'vote') %></span><br>
+    <% if logged_in? %>
+      <%= link_to vote_topic_path(topic, vote: false), method: 'post' do %>
+        <i class="icon-arrow-down"></i>
+      <% end %>
+    <% end %>
+  </div>
   <div class="well span8">
     <%= render topic.categories %>
     <h4><%= link_to topic.title, topic %></h4>
