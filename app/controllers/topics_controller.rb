@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
   before_action :require_creator, only: [:edit, :update]
 
   def index
-    @topics = Topic.all.sort_by { |topic| topic.votes.size }.reverse
+    @topics = Topic.all.sort_by { |topic| topic.total_votes }.reverse
   end
 
   def show
@@ -17,6 +17,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
+    @topic.user = current_user
     if @topic.save
       flash[:notice] = "Your new topic was created!"
       redirect_to root_path
@@ -38,8 +39,8 @@ class TopicsController < ApplicationController
   end
 
   def vote
-    vote = Vote.new(voteable: @topic, vote: params[:vote], user: current_user)
-    if vote.save
+    @vote = Vote.new(voteable: @topic, vote: params[:vote], user: current_user)
+    if @vote.save
       flash[:notice] = "You vote was counted!"
     else
       flash[:error] = "You can only vote once for <strong>#{@topic.title}</strong>".html_safe

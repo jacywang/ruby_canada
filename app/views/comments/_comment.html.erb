@@ -1,4 +1,17 @@
 <div class="row">
+  <div class="span0 well text-center">
+    <% if logged_in? %>
+      <%= link_to vote_topic_comment_path(comment.topic, comment, vote: true), method:'post' do %>
+        <i class="icon-arrow-up"></i>
+      <% end %>
+    <% end %><br>
+    <%= pluralize(comment.total_votes, 'vote') %><br>
+    <% if logged_in? %>
+      <%= link_to vote_topic_comment_path(comment.topic, comment, vote: false), method:'post' do %>
+        <i class="icon-arrow-down"></i>
+      <% end %>
+    <% end %>
+  </div>
   <div class="well span8">
     <p><em>"<%= comment.body %>"</em></p> 
     <span class="quiet">by</span> 
