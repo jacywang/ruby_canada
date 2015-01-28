@@ -1,0 +1,5 @@
+<% if @vote.valid? %>
+  $("#topic_<%= @topic.id %>_vote").html("<%= pluralize(@topic.total_votes,'vote') %>");
+<% else %>
+  alert("You can only vote for this post once!")
+<% end %>

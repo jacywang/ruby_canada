@@ -39,13 +39,19 @@ class TopicsController < ApplicationController
   end
 
   def vote
-    @vote = Vote.new(voteable: @topic, vote: params[:vote], user: current_user)
-    if @vote.save
-      flash[:notice] = "You vote was counted!"
-    else
-      flash[:error] = "You can only vote once for <strong>#{@topic.title}</strong>".html_safe
+    @vote = Vote.create(voteable: @topic, vote: params[:vote], user: current_user)
+
+    respond_to do |format|
+      format.html do 
+        if @vote.valid?
+          flash[:notice] = "You vote was counted!"
+        else
+          flash[:error] = "You can only vote once for <strong>#{@topic.title}</strong>".html_safe
+        end
+        redirect_to :back
+      end
+      format.js
     end
-    redirect_to :back
   end
 
   private
